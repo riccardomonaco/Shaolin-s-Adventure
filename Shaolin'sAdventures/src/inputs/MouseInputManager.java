@@ -25,7 +25,6 @@ public class MouseInputManager implements MouseListener{
 			default:
 				break;
 		}
-		
 	}
 
 	@Override
