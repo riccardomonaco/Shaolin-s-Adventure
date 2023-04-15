@@ -6,7 +6,7 @@ import java.awt.event.MouseListener;
 import gamestates.Gamestate;
 import main.GamePanel;
 
-public class MouseInputManager implements MouseListener{
+public class MouseInputManager implements MouseListener {
 
 	private GamePanel gamePanel;
 	
@@ -22,6 +22,7 @@ public class MouseInputManager implements MouseListener{
 				break;
 			case PLAYING:
 				this.gamePanel.getGame().getMenu().mouseClicked(e);
+				break;
 			default:
 				break;
 		}
@@ -34,7 +35,9 @@ public class MouseInputManager implements MouseListener{
 			this.gamePanel.getGame().getMenu().mousePressed(e);
 			break;
 		case PLAYING:
-			this.gamePanel.getGame().getMenu().mousePressed(e);
+			this.gamePanel.getGame().getPlaying().mousePressed(e);
+			this.gamePanel.getGame().getPlaying().getPauseOverlay().mousePressed(e);
+			break;
 		default:
 			break;
 	}
@@ -48,7 +51,9 @@ public class MouseInputManager implements MouseListener{
 			this.gamePanel.getGame().getMenu().mouseReleased(e);
 			break;
 		case PLAYING:
-			this.gamePanel.getGame().getMenu().mouseReleased(e);
+			this.gamePanel.getGame().getPlaying().mouseReleased(e);
+			this.gamePanel.getGame().getPlaying().getPauseOverlay().mouseReleased(e);
+			break;
 		default:
 			break;
 	}

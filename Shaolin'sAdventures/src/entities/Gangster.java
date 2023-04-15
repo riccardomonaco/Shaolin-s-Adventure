@@ -70,7 +70,6 @@ public class Gangster extends Entity{
 	@Override
 	public void draw(Graphics2D g, int offset) {
 		
-		System.out.println((int)this.xPosition + (int)this.yPosition);
 		g.drawImage(gangsterAnimations[this.indexAnimation], (int)this.xPosition - offset, (int)this.yPosition, TILE_SIZE, TILE_SIZE, null);
 		//System.out.println(xPosition+" "+yPosition);
 	}

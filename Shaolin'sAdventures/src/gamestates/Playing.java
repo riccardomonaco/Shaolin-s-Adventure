@@ -18,13 +18,13 @@ import ui.PauseOverlay;
 
 import static utils.Constants.PanelConstants.*;
 
-public class Playing extends State implements StateMethods{
+public class Playing extends State implements StateMethods {
 		
 	private Player player;
 	private LevelManager levelManager;
 	private EntityManager entityManager;
 	private PauseOverlay pauseOverlay;
-	
+
 	private boolean isPaused;
 	
 	private int currentOffset = 0;
@@ -44,11 +44,14 @@ public class Playing extends State implements StateMethods{
 		this.entityManager = new EntityManager(game, this.levelManager);
 		this.player = new Player();
 		this.player.setCurrentLevel(levelManager.getCurrentLevel());
-		this.pauseOverlay = new PauseOverlay();
+		this.pauseOverlay = new PauseOverlay(this.game);
 		this.isPaused = false;
 	}
+	
+	public PauseOverlay getPauseOverlay() {
+		return pauseOverlay;
+	}
 		
-
 	public Player getPlayer() {
 		
 		return this.player;
@@ -66,6 +69,8 @@ public class Playing extends State implements StateMethods{
 			this.levelManager.update();
 			this.entityManager.update();
 			this.player.update();
+		}else {
+			this.pauseOverlay.update();
 		}
 	}
 
