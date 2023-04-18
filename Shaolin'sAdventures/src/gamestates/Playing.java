@@ -53,12 +53,10 @@ public class Playing extends State implements StateMethods {
 	}
 		
 	public Player getPlayer() {
-		
 		return this.player;
 	}
 		
 	public LevelManager getLevelManager() {
-			
 		return this.levelManager;
 	}
 
@@ -91,6 +89,11 @@ public class Playing extends State implements StateMethods {
 	public void setPlayerOffset() {
 		
 		this.player.setOffset(currentOffset);
+	}
+	
+	public void resetPlaying() {
+		this.isPaused = false;
+		this.initClasses();
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import gamestates.Gamestate;
 import gamestates.State;
@@ -15,12 +16,12 @@ import static utils.Constants.PanelConstants.*;
 
 import utils.LoadSave;
 import utils.Constants.PanelConstants;
+import utils.Constants.UI.ButtonsConstants;
 
 public class PauseOverlay extends State implements StateMethods{
 
 	private BufferedImage pauseMenu;
-	
-	private GameButton menuButton;
+	private GameButton[] pauseButtons;
 	
 	private int xPosition;
 	private int yPosition;
@@ -30,27 +31,47 @@ public class PauseOverlay extends State implements StateMethods{
 	public PauseOverlay(Game game) {
 		super(game);
 		loadOverlay();
-		loadButton();
+		loadButtons();
 	}
 
 	private void loadOverlay() {
-		this.pauseMenu = LoadSave.getImage("/overlays/pause_menu.png");
-		this.width = TILE_SIZE * 4;
-		this.height = TILE_SIZE * 4;
-		this.xPosition = SCREEN_WIDTH/2 - TILE_SIZE*2;
-		this.yPosition = SCREEN_HEIGHT/2 - TILE_SIZE*2;
+		this.pauseMenu = LoadSave.getImage("/overlays/pause_menu_bg_title.png");
+		this.width = TILE_SIZE * 6;
+		this.height = TILE_SIZE * 6;
+		this.xPosition = SCREEN_WIDTH/2 - TILE_SIZE*3;
+		this.yPosition = SCREEN_HEIGHT/2 - TILE_SIZE*4;
 		
 	}
 	
-	private void loadButton() {
-		menuButton = new GameButton((int)PanelConstants.SCREEN_WIDTH/2 - 128, 
-									(int)PanelConstants.SCREEN_HEIGHT/2 + 50, 
-									new String[]{"/buttons/menu1.png", "/buttons/menu2.png"}, 
-									Gamestate.MENU);
+	private void loadButtons() {
+		this.pauseButtons = new GameButton[3];
+		
+		pauseButtons[0] = new GameButton(ButtonsConstants.HOME_BT_X, 
+										 ButtonsConstants.HOME_BT_Y,
+										 ButtonsConstants.PAUSE_WIDTH, 
+										 ButtonsConstants.PAUSE_HEIGHT,
+										 new String[]{"/buttons/home1.png", "/buttons/home2.png"}, 
+										 Gamestate.MENU);
+		
+		pauseButtons[1] = new GameButton(ButtonsConstants.RESTART_BT_X, 
+				 						 ButtonsConstants.RESTART_BT_Y,
+				 						 ButtonsConstants.PAUSE_WIDTH, 
+				 						 ButtonsConstants.PAUSE_HEIGHT,
+										 new String[]{"/buttons/restart1.png", "/buttons/restart2.png"}, 
+										 Gamestate.PLAYING);
+		
+		pauseButtons[2] = new GameButton(ButtonsConstants.VOLUME_BT_X, 
+										 ButtonsConstants.VOLUME_BT_Y,
+										 ButtonsConstants.PAUSE_WIDTH, 
+										 ButtonsConstants.PAUSE_HEIGHT, 
+										 new String[]{"/buttons/enable_volume1.png", "/buttons/enable_volume2.png"}, 
+										 Gamestate.PLAYING);
 	}
 	
 	public void update() {
-		this.menuButton.update();
+		for(GameButton b: pauseButtons) {
+			b.update();
+		}
 	}
 	
 	public void draw(Graphics2D g) {
@@ -58,7 +79,9 @@ public class PauseOverlay extends State implements StateMethods{
 		g.setColor(new Color(128, 128, 128, 200));
 		g.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 		g.drawImage(pauseMenu, xPosition, yPosition, width, height, null);
-		menuButton.draw(g);
+		for(GameButton b: pauseButtons) {
+			b.draw(g);
+		}
 	}
 
 	@Override
@@ -75,19 +98,26 @@ public class PauseOverlay extends State implements StateMethods{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if(this.isOver(e, this.menuButton)) {
-			this.menuButton.setMouseOver(true);
+		for(GameButton b: pauseButtons) {
+			if(this.isOver(e, b)) {
+				b.setMouseOver(true);
+			}
 		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(this.isOver(e, this.menuButton)) {
-			if(this.menuButton.isMouseOver()) {
-				this.menuButton.setGamestate();
+		for(GameButton b: pauseButtons) {
+			if(this.isOver(e, b)) {
+				if(b.isMouseOver()) {
+					b.setGamestate();
+					if(b.equals(pauseButtons[1])) {
+						this.game.getPlaying().resetPlaying();
+					}
+				}
 			}
+			b.reset();
 		}
-		this.menuButton.reset();
 	}
 
 	@Override

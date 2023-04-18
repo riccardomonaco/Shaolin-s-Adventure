@@ -10,7 +10,7 @@ import ui.GameButton;
 import utils.LoadSave;
 import utils.Constants.PanelConstants;
 import utils.Constants.UI;
-import utils.Constants.UI.ButtonsCostants;
+import utils.Constants.UI.ButtonsConstants;
 
 public class Menu extends State implements StateMethods{
 	
@@ -30,13 +30,17 @@ public class Menu extends State implements StateMethods{
 	private void loadButtons() {
 		this.menuButtons = new GameButton[2];
 		
-		menuButtons[0] = new GameButton((int)PanelConstants.SCREEN_WIDTH/2 + ButtonsCostants.PLAY_OFFSET, 
-										(int)PanelConstants.SCREEN_HEIGHT/2, 
+		menuButtons[0] = new GameButton((int)PanelConstants.SCREEN_WIDTH/2 + ButtonsConstants.PLAY_OFFSET, 
+										(int)PanelConstants.SCREEN_HEIGHT/2,
+										ButtonsConstants.MENU_WIDTH,
+										ButtonsConstants.MENU_HEIGHT,
 										new String[]{"/buttons/play1.png", "/buttons/play2.png"}, 
 										Gamestate.PLAYING);
 		
 		menuButtons[1] = new GameButton((int)PanelConstants.SCREEN_WIDTH/2, 
-										(int)PanelConstants.SCREEN_HEIGHT/2 + ButtonsCostants.QUIT_OFFSET, 
+										(int)PanelConstants.SCREEN_HEIGHT/2 + ButtonsConstants.QUIT_OFFSET,
+										ButtonsConstants.MENU_WIDTH,
+										ButtonsConstants.MENU_HEIGHT,
 										new String[]{"/buttons/quit2.png", "/buttons/quit1.png"}, 
 										Gamestate.QUIT);
 	}
@@ -56,7 +60,7 @@ public class Menu extends State implements StateMethods{
 
 	@Override
 	public void draw(Graphics2D g) {
-		g.drawImage(this.splashLogo, PanelConstants.SCREEN_WIDTH/2 - UI.SPLASH_WIDTH, PanelConstants.TILE_SIZE, ButtonsCostants.WIDTH, ButtonsCostants.HEIGHT, null);
+		g.drawImage(this.splashLogo, PanelConstants.SCREEN_WIDTH/2 - UI.SPLASH_WIDTH, PanelConstants.TILE_SIZE, ButtonsConstants.MENU_WIDTH, ButtonsConstants.MENU_HEIGHT, null);
 		for(GameButton button: menuButtons) {
 			button.draw(g);
 		}

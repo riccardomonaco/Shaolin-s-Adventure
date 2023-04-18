@@ -5,13 +5,15 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import gamestates.Gamestate;
-import utils.Constants.UI.ButtonsCostants;
+import utils.Constants.UI.ButtonsConstants;
 import utils.LoadSave;
 
 public class GameButton {
 
 	private int xPosition;
 	private int yPosition;
+	private int width;
+	private int height;
 	private int imgIndex;
 	
 	private Rectangle hitBox;
@@ -21,10 +23,20 @@ public class GameButton {
 	private Gamestate gameState;
 	private BufferedImage[] buttonImgs;
 	
-	public GameButton(int xPosition, int yPosition, String[] imgPath, Gamestate gameState) {
+	public GameButton(int xPosition, int yPosition, int width, int height, String[] imgPath, Gamestate gameState) {
 		this.xPosition = xPosition;
 		this.yPosition = yPosition;
+		this.width = width;
+		this.height = height;
 		this.gameState = gameState;
+		
+		this.loadImages(imgPath);
+		this.initHitBox();
+	}
+	
+	public GameButton(int xPosition, int yPosition, String[] imgPath) {
+		this.xPosition = xPosition;
+		this.yPosition = yPosition;
 		
 		this.loadImages(imgPath);
 		this.initHitBox();
@@ -36,8 +48,9 @@ public class GameButton {
 	}
 	
 	private void initHitBox() {
-		this.hitBox = new Rectangle(this.xPosition, this.yPosition + 50, ButtonsCostants.WIDTH, ButtonsCostants.HEIGHT - 125);
+		this.hitBox = new Rectangle(this.xPosition, this.yPosition, this.width, this.height);
 	}
+	
 	
 	public Rectangle returnHitBox() {
 		return this.hitBox;
@@ -52,7 +65,7 @@ public class GameButton {
 	}
 	
 	public void draw(Graphics2D g) {
-		g.drawImage(buttonImgs[imgIndex], this.xPosition, this.yPosition, ButtonsCostants.WIDTH, ButtonsCostants.HEIGHT, null);
+		g.drawImage(buttonImgs[imgIndex], this.xPosition, this.yPosition, this.width, this.height, null);
 	}
 	
 	public void update() {
