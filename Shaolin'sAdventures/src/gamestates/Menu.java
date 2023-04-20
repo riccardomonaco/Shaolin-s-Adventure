@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
+import audio.AudioPlayer;
 import main.Game;
 import ui.GameButton;
 import utils.LoadSave;
@@ -101,6 +102,8 @@ public class Menu extends State implements StateMethods{
 			if(this.isOver(e, button)) {
 				if(button.isMouseOver()) {
 					button.setGamestate();
+					if(Gamestate.gameState == Gamestate.PLAYING) this.game.getAudioPlayer().playSoundTrack(AudioPlayer.LEVEL);
+					else if(Gamestate.gameState == Gamestate.MENU) this.game.getAudioPlayer().playSoundTrack(AudioPlayer.MENU);
 				}
 				break;
 			}

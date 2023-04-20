@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.management.loading.PrivateClassLoader;
 
+import audio.AudioPlayer;
 import entities.Entity;
 import entities.EntityManager;
 import entities.Gangster;
@@ -106,6 +107,8 @@ public class Playing extends State implements StateMethods {
 		for(Entity e: this.entityManager.currentEntities) {
 			if(this.player.getHitBox().intersects(e.getHitBox())) {
 				this.isDead = true;
+				this.game.getAudioPlayer().stopSoundTrack(AudioPlayer.LEVEL);
+				this.game.getAudioPlayer().playSoundEffects(AudioPlayer.GAMEOVER);
 			}
 		}
 	}
@@ -113,6 +116,8 @@ public class Playing extends State implements StateMethods {
 	private void checkPlayerFell() {
 		if(isFellOff(this.player.getHitBox())) {
 			this.isDead = true;
+			this.game.getAudioPlayer().stopSoundTrack(AudioPlayer.LEVEL);
+			this.game.getAudioPlayer().playSoundEffects(AudioPlayer.GAMEOVER);
 		}
 	}
 	

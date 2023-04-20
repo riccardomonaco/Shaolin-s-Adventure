@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Graphics2D;
 
+import audio.AudioPlayer;
 import gamestates.Gamestate;
 import gamestates.Menu;
 import gamestates.Playing;
@@ -10,18 +11,20 @@ public class Game implements Runnable{
 	
 	private final int FPS = 60;	// frames per second
 	private final int UPS = 150; // updates per second
-
-	private Playing playingState;
-	private Menu menuState;
 	
 	private GameWindow gameWindow;
 	private GamePanel gamePanel;
 	private Thread gameThread;
 	
+	private Playing playingState;
+	private Menu menuState;
+	private AudioPlayer audioPlayer;
+	
 	public Game() {
 		
 		this.playingState = new Playing(this);
 		this.menuState = new Menu(this);
+		this.audioPlayer = new AudioPlayer();
 		
 		this.gamePanel = new GamePanel(this);
 		this.gameWindow = new GameWindow(gamePanel);
@@ -108,5 +111,10 @@ public class Game implements Runnable{
 	public Menu getMenu() {
 		
 		return this.menuState;
+	}
+	
+	public AudioPlayer getAudioPlayer() {
+		
+		return this.audioPlayer;
 	}
 }

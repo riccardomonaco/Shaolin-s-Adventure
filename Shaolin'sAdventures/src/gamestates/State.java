@@ -2,6 +2,7 @@ package gamestates;
 
 import java.awt.event.MouseEvent;
 
+import audio.AudioPlayer;
 import main.Game;
 import ui.GameButton;
 
@@ -21,5 +22,16 @@ public class State {
 	public Game getGame() {
 		
 		return this.game;
+	}
+	
+	public void setSoundTrack() {
+		switch (Gamestate.gameState) {
+			case MENU: 
+				this.game.getAudioPlayer().playSoundTrack(AudioPlayer.MENU);
+			case PLAYING: 
+				this.game.getAudioPlayer().playSoundTrack(AudioPlayer.LEVEL);
+			default:
+				break;
+		}
 	}
 }
