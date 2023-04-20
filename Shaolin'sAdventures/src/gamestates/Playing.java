@@ -17,6 +17,7 @@ import main.Game;
 import ui.GameOverOverlay;
 import ui.PauseOverlay;
 
+import static utils.HelpMethods.*;
 import static utils.Constants.PanelConstants.*;
 
 public class Playing extends State implements StateMethods {
@@ -73,6 +74,7 @@ public class Playing extends State implements StateMethods {
 	public void update() {
 		if(!isDead) {
 			if(!isPaused) {
+				this.checkPlayerFell();
 				this.checkPlayerHit();
 				this.checkCloseBorder();
 				this.levelManager.update();
@@ -105,6 +107,12 @@ public class Playing extends State implements StateMethods {
 			if(this.player.getHitBox().intersects(e.getHitBox())) {
 				this.isDead = true;
 			}
+		}
+	}
+	
+	private void checkPlayerFell() {
+		if(isFellOff(this.player.getHitBox())) {
+			this.isDead = true;
 		}
 	}
 	

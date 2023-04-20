@@ -4,6 +4,10 @@ import static utils.Constants.PanelConstants.*;
 
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
+import java.security.PublicKey;
+
+import utils.Constants.PanelConstants;
+import utils.Constants.PlayerConstants;
 
 import static utils.Constants.LevelConstants.*;
 
@@ -63,5 +67,9 @@ public class HelpMethods {
 			if(!isSolid(hitbox.x + hitbox.width, hitbox.y + hitbox.height + 1, map))	//right-bottom corner
 				return false;
 		return true;
+	}
+	
+	public static boolean isFellOff(Rectangle2D.Float hitbox) {
+		return (hitbox.y + hitbox.height + PlayerConstants.HITBOX_W_OFFSET) >= PanelConstants.SCREEN_HEIGHT;
 	}
 }

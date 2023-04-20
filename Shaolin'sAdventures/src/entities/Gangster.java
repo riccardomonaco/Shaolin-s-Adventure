@@ -12,9 +12,7 @@ import utils.LoadSave;
 
 public class Gangster extends Entity{
 	
-	private float gangsterSpeed;
-	private boolean direction;
-	private int tickDirection;
+	private int tickAttack;
 	private BufferedImage[] gangsterAnimations;
 	
 	public Gangster(int initXPosition, int initYPosition) {
@@ -23,15 +21,11 @@ public class Gangster extends Entity{
 		
 		this.initHitBox(HITBOX_W_OFFSET, HITBOX_H_OFFSET, HITBOX_X_OFFSET, HITBOX_Y_OFFSET);
 		this.gangsterAnimations = LoadSave.getEnemySprites().get(0);
-		
-		this.gangsterSpeed = 1f;
-		this.direction = true;
-		
+				
 		//initializing animations support counters
 		this.indexAnimation = 0;
 		this.tickAnimation = 0;
 		this.speedAnimation = 40;
-		this.tickDirection = 0;
 	}
 	
 	private void updateAnimation() {

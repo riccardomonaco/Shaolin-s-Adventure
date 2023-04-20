@@ -17,6 +17,7 @@ public class LevelManager {
 	private Level currentLevel;
 	private Level levelOne;
 	private Level levelTwo;
+	private Level levelThree;
 	private EntityManager entityManager;
 	
 	private HashMap<Integer, BufferedImage> levelSprites;
@@ -28,7 +29,8 @@ public class LevelManager {
 		this.levelSprites = LoadSave.getLevelSprites();
 		this.levelOne = new Level("/maps/levelonemap.txt", "/maps/leveloneentities.txt");
 		this.levelTwo = new Level("/maps/leveltwomap.txt", "/maps/leveltwoentities.txt");
-		this.currentLevel = levelTwo;
+		this.levelThree = new Level("/maps/levelthreemap.txt", "/maps/levelthreeentities.txt");
+		this.currentLevel = levelThree;
 	}
 	
 	public Level getCurrentLevel() {

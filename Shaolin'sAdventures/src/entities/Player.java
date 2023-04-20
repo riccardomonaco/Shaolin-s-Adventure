@@ -1,5 +1,6 @@
 package entities;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
@@ -259,6 +260,10 @@ public class Player extends Entity{
 		
 		g.drawImage(playerAnimations.get(playerAction)[indexAnimation], (int)xPosition - currentOffset, (int)yPosition, TILE_SIZE, TILE_SIZE, null);
 		//System.out.println(xPosition+" "+yPosition);
+		
+		//TEST DRAW HITBOX
+		g.setColor(new Color(255, 255, 255));
+		g.drawRect((int)this.getHitBox().x - currentOffset, (int)this.getHitBox().y, TILE_SIZE - HITBOX_W_OFFSET, TILE_SIZE - HITBOX_W_OFFSET);
 	}
 
 	public void setOffset(int currentOffset) {
