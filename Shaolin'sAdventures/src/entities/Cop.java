@@ -71,9 +71,5 @@ public class Cop extends Entity{
 	public void draw(Graphics2D g, int offset) {
 		
 		g.drawImage(copAnimations[this.indexAnimation], (int)xPosition - offset, (int)yPosition, TILE_SIZE, TILE_SIZE, null);
-
-		//TEST DRAW HITBOX
-		g.setColor(new Color(255, 255, 255));
-		g.drawRect((int)this.getHitBox().x - offset, (int)this.getHitBox().y, TILE_SIZE - HITBOX_W_OFFSET, TILE_SIZE - HITBOX_W_OFFSET);
 	}
 }
