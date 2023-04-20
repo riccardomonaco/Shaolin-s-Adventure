@@ -17,8 +17,6 @@ public class Gangster extends Entity{
 	private int tickDirection;
 	private BufferedImage[] gangsterAnimations;
 	
-	
-
 	public Gangster(int initXPosition, int initYPosition) {
 		
 		super(initXPosition, initYPosition);
@@ -45,19 +43,6 @@ public class Gangster extends Entity{
 				this.indexAnimation = 0;
 			}
 			this.tickAnimation = 0;
-		}
-	}
-	
-	private void updatePosition() {
-		
-		if(this.direction) this.xPosition += this.gangsterSpeed;
-		else this.xPosition -= this.gangsterSpeed;
-		
-		this.tickDirection++;
-		
-		if(this.tickDirection == 5) {
-			this.tickDirection = 0;
-			this.direction = !this.direction;
 		}
 	}
 	

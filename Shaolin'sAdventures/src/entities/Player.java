@@ -62,7 +62,7 @@ public class Player extends Entity{
 		//initializing various forces
 		this.playerSpeed = 2f;
 		this.airSpeed = 0f;
-		this.jumpSpeed = -7f;
+		this.jumpSpeed = -6f;
 		this.gravitySpeed = 0.05f * SCALE;
 		this.fallSpeed = 0.05f * SCALE;
 		

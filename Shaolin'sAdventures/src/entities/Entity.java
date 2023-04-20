@@ -49,7 +49,7 @@ public class Entity {
 	
 	
 	/*
-	 * updating the position of the hitbox with the player movement, applying offsets
+	 * updating the position of the hitbox, applying offsets
 	 */
 	
 	protected void updateHitBox(int HITBOX_X_OFFSET, int HITBOX_Y_OFFSET) {

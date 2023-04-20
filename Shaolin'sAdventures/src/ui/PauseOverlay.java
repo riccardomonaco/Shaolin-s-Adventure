@@ -35,7 +35,7 @@ public class PauseOverlay extends State implements StateMethods{
 	}
 
 	private void loadOverlay() {
-		this.pauseMenu = LoadSave.getImage("/overlays/pause_menu_bg_title.png");
+		this.pauseMenu = LoadSave.getImage("/overlays/pause_menu_bg_alt.png");
 		this.width = TILE_SIZE * 6;
 		this.height = TILE_SIZE * 6;
 		this.xPosition = SCREEN_WIDTH/2 - TILE_SIZE*3;

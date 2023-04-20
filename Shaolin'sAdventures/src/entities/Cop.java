@@ -5,6 +5,7 @@ import static utils.Constants.PlayerConstants.HITBOX_W_OFFSET;
 import static utils.Constants.PlayerConstants.HITBOX_X_OFFSET;
 import static utils.Constants.PlayerConstants.HITBOX_Y_OFFSET;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
@@ -61,14 +62,18 @@ public class Cop extends Entity{
 	
 	@Override
 	public void update() {
-		this.updateAnimation();
 		this.updatePosition();
+		this.updateHitBox(HITBOX_X_OFFSET, HITBOX_Y_OFFSET);
+		this.updateAnimation();
 	}
 	
 	@Override
 	public void draw(Graphics2D g, int offset) {
 		
 		g.drawImage(copAnimations[this.indexAnimation], (int)xPosition - offset, (int)yPosition, TILE_SIZE, TILE_SIZE, null);
-		//System.out.println(xPosition+" "+yPosition);
+
+		//TEST DRAW HITBOX
+		g.setColor(new Color(255, 255, 255));
+		g.drawRect((int)this.getHitBox().x - offset, (int)this.getHitBox().y, TILE_SIZE - HITBOX_W_OFFSET, TILE_SIZE - HITBOX_W_OFFSET);
 	}
 }

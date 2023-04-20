@@ -15,16 +15,18 @@ import utils.Constants.UI.ButtonsConstants;
 public class Menu extends State implements StateMethods{
 	
 	private GameButton[] menuButtons;
+	private BufferedImage menuBackground;
 	private BufferedImage splashLogo;
 
 	public Menu(Game game) {
 		super(game);
 		this.loadButtons();
-		this.getSplashLogo();
+		this.loadImages();
 	}
 
-	private void getSplashLogo() {
+	private void loadImages() {
 		this.splashLogo = LoadSave.getImage("/overlays/splash_logo.png");
+		this.menuBackground = LoadSave.getImage("/overlays/menu_bg.png");
 	}
 
 	private void loadButtons() {
@@ -60,6 +62,7 @@ public class Menu extends State implements StateMethods{
 
 	@Override
 	public void draw(Graphics2D g) {
+		g.drawImage(this.menuBackground, 0, 0, PanelConstants.SCREEN_WIDTH, PanelConstants.SCREEN_HEIGHT, null);
 		g.drawImage(this.splashLogo, PanelConstants.SCREEN_WIDTH/2 - UI.SPLASH_WIDTH, PanelConstants.TILE_SIZE, ButtonsConstants.MENU_WIDTH, ButtonsConstants.MENU_HEIGHT, null);
 		for(GameButton button: menuButtons) {
 			button.draw(g);
