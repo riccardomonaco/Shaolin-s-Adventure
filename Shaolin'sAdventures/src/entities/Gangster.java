@@ -30,7 +30,7 @@ public class Gangster extends Entity{
 		//initializing animations support counters
 		this.indexAnimation = 0;
 		this.tickAnimation = 0;
-		this.speedAnimation = 35;
+		this.speedAnimation = 40;
 		this.tickDirection = 0;
 	}
 	

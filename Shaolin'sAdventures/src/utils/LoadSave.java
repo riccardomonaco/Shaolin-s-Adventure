@@ -90,16 +90,18 @@ public class LoadSave {
 		BufferedImage rightCorner = null;
 		BufferedImage roof = null;
 		BufferedImage background = null;
+		BufferedImage wallStair = null;
 		
 		HashMap<Integer, BufferedImage> levelSprites = new HashMap<>();
 		
 		try {
 			
-			wall		= ImageIO.read(LoadSave.class.getResourceAsStream("/levels/level (2).png"));
-			leftCorner 	= ImageIO.read(LoadSave.class.getResourceAsStream("/levels/level (4).png"));
-			rightCorner = ImageIO.read(LoadSave.class.getResourceAsStream("/levels/level (5).png"));
-			roof 		= ImageIO.read(LoadSave.class.getResourceAsStream("/levels/level (3).png"));
-			background	= ImageIO.read(LoadSave.class.getResourceAsStream("/levels/level (1).png"));			
+			wall		= ImageIO.read(LoadSave.class.getResourceAsStream("/levels/wall.png"));
+			leftCorner 	= ImageIO.read(LoadSave.class.getResourceAsStream("/levels/leftCorner.png"));
+			rightCorner = ImageIO.read(LoadSave.class.getResourceAsStream("/levels/rightCorner.png"));
+			roof 		= ImageIO.read(LoadSave.class.getResourceAsStream("/levels/roof.png"));
+			background	= ImageIO.read(LoadSave.class.getResourceAsStream("/levels/background.png"));
+			wallStair	= ImageIO.read(LoadSave.class.getResourceAsStream("/levels/wallStair.png"));	
 			
 		}catch(IOException e) {
 			
@@ -111,6 +113,7 @@ public class LoadSave {
 		levelSprites.put(2, rightCorner);
 		levelSprites.put(3, roof);
 		levelSprites.put(4, background);
+		levelSprites.put(5, wallStair);
 
 		
 		return levelSprites;

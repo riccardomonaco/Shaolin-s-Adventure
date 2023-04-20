@@ -34,14 +34,6 @@ public class GameButton {
 		this.initHitBox();
 	}
 	
-	public GameButton(int xPosition, int yPosition, String[] imgPath) {
-		this.xPosition = xPosition;
-		this.yPosition = yPosition;
-		
-		this.loadImages(imgPath);
-		this.initHitBox();
-	}
-	
 	private void loadImages(String[] path) {
 		this.buttonImgs = new BufferedImage[2];
 		this.buttonImgs = LoadSave.getButtonsImages(path);

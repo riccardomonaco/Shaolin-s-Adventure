@@ -1,6 +1,7 @@
 package entities;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
@@ -101,6 +102,13 @@ public class Player extends Entity{
 	public void setJump(boolean value) {
 		
 		this.isJumping = value;
+	}
+	
+	public void checkHit(Rectangle2D.Float enemyHitBox) {
+
+		if(enemyHitBox.intersects(this.getHitBox())) {
+
+		}
 	}
 		
 	

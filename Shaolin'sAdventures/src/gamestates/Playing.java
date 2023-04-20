@@ -14,6 +14,7 @@ import entities.Gangster;
 import entities.Player;
 import levels.LevelManager;
 import main.Game;
+import ui.GameOverOverlay;
 import ui.PauseOverlay;
 
 import static utils.Constants.PanelConstants.*;
@@ -24,8 +25,10 @@ public class Playing extends State implements StateMethods {
 	private LevelManager levelManager;
 	private EntityManager entityManager;
 	private PauseOverlay pauseOverlay;
+	private GameOverOverlay gameOverOverlay;
 
-	private boolean isPaused;
+	public boolean isPaused;
+	public boolean isDead;
 	
 	private int currentOffset = 0;
 	private int maxOffset = SCREEN_WIDTH * 2;
@@ -45,11 +48,17 @@ public class Playing extends State implements StateMethods {
 		this.player = new Player();
 		this.player.setCurrentLevel(levelManager.getCurrentLevel());
 		this.pauseOverlay = new PauseOverlay(this.game);
+		this.gameOverOverlay = new GameOverOverlay(this.game);
 		this.isPaused = false;
+		this.isDead = false;
 	}
 	
 	public PauseOverlay getPauseOverlay() {
 		return pauseOverlay;
+	}
+	
+	public GameOverOverlay getGameOverOverlay() {
+		return this.gameOverOverlay;
 	}
 		
 	public Player getPlayer() {
@@ -62,13 +71,18 @@ public class Playing extends State implements StateMethods {
 
 	@Override
 	public void update() {
-		if(!isPaused) {
-			checkCloseBorder();
-			this.levelManager.update();
-			this.entityManager.update();
-			this.player.update();
+		if(!isDead) {
+			if(!isPaused) {
+				this.checkPlayerHit();
+				this.checkCloseBorder();
+				this.levelManager.update();
+				this.entityManager.update();
+				this.player.update();
+			}else {
+				this.pauseOverlay.update();
+			}
 		}else {
-			this.pauseOverlay.update();
+			this.gameOverOverlay.update();
 		}
 	}
 
@@ -84,6 +98,14 @@ public class Playing extends State implements StateMethods {
 		
 		this.setPlayerOffset();
 		
+	}
+	
+	private void checkPlayerHit() {
+		for(Entity e: this.entityManager.currentEntities) {
+			if(this.player.getHitBox().intersects(e.getHitBox())) {
+				this.isDead = true;
+			}
+		}
 	}
 	
 	public void setPlayerOffset() {
@@ -102,8 +124,12 @@ public class Playing extends State implements StateMethods {
 		this.levelManager.draw(g, currentOffset);
 		this.entityManager.draw(g, currentOffset);
 		this.player.draw(g);
-		if (isPaused) {
-			this.pauseOverlay.draw(g);
+		if(isDead) {
+			this.gameOverOverlay.draw(g);
+		}else {
+			if(isPaused) {
+				this.pauseOverlay.draw(g);
+			}
 		}
 	}
 

@@ -1,6 +1,7 @@
 package entities;
 
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,15 @@ public class EntityManager {
 	public void setCurrentEntities() {
 		
 		this.currentEntities = this.levelManager.getCurrentLevel().getEnemies();
+	}
+	
+	public void checkHit(Rectangle2D.Float playerHitBox) {
+
+		for(Entity e: currentEntities) {
+			if(playerHitBox.intersects(e.getHitBox())) {
+				
+			}
+		}
 	}
 	
 	public void update() {
