@@ -44,7 +44,7 @@ public class PauseOverlay extends State implements StateMethods{
 	}
 	
 	private void loadButtons() {
-		this.pauseButtons = new GameButton[3];
+		this.pauseButtons = new GameButton[4];
 		
 		pauseButtons[0] = new GameButton(ButtonsConstants.HOME_BT_X, 
 										 ButtonsConstants.HOME_BT_Y,
@@ -65,6 +65,13 @@ public class PauseOverlay extends State implements StateMethods{
 										 ButtonsConstants.PAUSE_WIDTH, 
 										 ButtonsConstants.PAUSE_HEIGHT, 
 										 new String[]{"/buttons/enable_volume1.png", "/buttons/enable_volume2.png"}, 
+										 Gamestate.PLAYING);
+		
+		pauseButtons[3] = new GameButton(ButtonsConstants.VOLUME_BT_X, 
+										 ButtonsConstants.VOLUME_BT_Y,
+										 ButtonsConstants.PAUSE_WIDTH, 
+										 ButtonsConstants.PAUSE_HEIGHT, 
+										 new String[]{"/buttons/disable_volume1.png", "/buttons/disable_volume2.png"}, 
 										 Gamestate.PLAYING);
 	}
 	
@@ -113,6 +120,9 @@ public class PauseOverlay extends State implements StateMethods{
 					b.setGamestate();
 					if(b.equals(pauseButtons[1])) {
 						this.game.getPlaying().resetPlaying();
+					}
+					if(b.equals(pauseButtons[2])) {
+						this.game.getAudioPlayer().setMute();
 					}
 				}
 			}

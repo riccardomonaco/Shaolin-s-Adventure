@@ -23,15 +23,4 @@ public class State {
 		
 		return this.game;
 	}
-	
-	public void setSoundTrack() {
-		switch (Gamestate.gameState) {
-			case MENU: 
-				this.game.getAudioPlayer().playSoundTrack(AudioPlayer.MENU);
-			case PLAYING: 
-				this.game.getAudioPlayer().playSoundTrack(AudioPlayer.LEVEL);
-			default:
-				break;
-		}
-	}
 }

@@ -67,7 +67,6 @@ public class GameButton {
 	
 	public void setGamestate() {
 		Gamestate.gameState = this.gameState;
-		System.out.println(Gamestate.gameState);
 	}
 	
 	public void reset() {

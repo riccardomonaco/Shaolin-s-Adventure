@@ -8,43 +8,73 @@ import java.util.List;
 import levels.LevelManager;
 import main.Game;
 
+/**
+ * 
+ * Represents the class which manages the current entities
+ * relative to the current level
+ * 
+ */
 public class EntityManager {
 	
-	private Game game;
-	private LevelManager levelManager;
+	private final Game game;
+	private final LevelManager levelManager;
 	public List<Entity> currentEntities;
-
-	public EntityManager(Game game, LevelManager levelManager) {
-		
+	
+	/**
+	 * Builds a new EntityManager, defining the LevelManager
+	 * and the Game
+	 * 
+	 * @param game
+	 * 				reference at the current Game class
+	 * @param levelManager
+	 * 				reference at the LevelManager
+	 */
+	public EntityManager(Game game, LevelManager levelManager) {	
 		this.game = game;
 		this.levelManager = levelManager;
 		this.currentEntities = new ArrayList<>();
 		this.setCurrentEntities();
 	}
 
+	/**
+	 * retrieves the current entities from the LevelManager
+	 */
 	public void setCurrentEntities() {
-		
 		this.currentEntities = this.levelManager.getCurrentLevel().getEnemies();
 	}
 	
+	/**
+	 * Checks if the player is touching one of 
+	 * the current entities
+	 * 
+	 * @param playerHitBox
+	 * 					hitbox of the player
+	 */
 	public void checkHit(Rectangle2D.Float playerHitBox) {
-
 		for(Entity e: currentEntities) {
 			if(playerHitBox.intersects(e.getHitBox())) {
-				
 			}
 		}
 	}
 	
+	/**
+	 * Updates every entity currently existing
+	 */
 	public void update() {
-		
 		for(Entity e: currentEntities) {
 			e.update();
 		}
 	}
 	
-	public void draw (Graphics2D g, int offset) {
-		
+	/**
+	 * Draws every entity currently existing
+	 * 
+	 * @param g
+	 * 			java drawing object
+	 * @param offset
+	 * 			current offset
+	 */
+	public void draw (Graphics2D g, int offset) {	
 		for(Entity e: currentEntities) {
 			e.draw(g, offset);
 		}

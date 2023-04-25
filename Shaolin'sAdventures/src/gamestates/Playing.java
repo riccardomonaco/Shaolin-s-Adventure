@@ -99,7 +99,7 @@ public class Playing extends State implements StateMethods {
 		if(currentOffset > maxOffset) currentOffset = maxOffset;
 		else if(currentOffset < 0) currentOffset = 0;
 		
-		this.setPlayerOffset();
+		//this.setPlayerOffset();
 		
 	}
 	
@@ -121,11 +121,6 @@ public class Playing extends State implements StateMethods {
 		}
 	}
 	
-	public void setPlayerOffset() {
-		
-		this.player.setOffset(currentOffset);
-	}
-	
 	public void resetPlaying() {
 		this.isPaused = false;
 		this.initClasses();
@@ -136,7 +131,7 @@ public class Playing extends State implements StateMethods {
 		
 		this.levelManager.draw(g, currentOffset);
 		this.entityManager.draw(g, currentOffset);
-		this.player.draw(g);
+		this.player.draw(g, currentOffset);
 		if(isDead) {
 			this.gameOverOverlay.draw(g);
 		}else {
