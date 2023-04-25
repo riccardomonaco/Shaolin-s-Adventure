@@ -6,7 +6,6 @@ import java.awt.geom.Rectangle2D;
 import static utils.Constants.PanelConstants.*;
 
 /**
- * 
  * Represents the generic entity of the game
  * 
  */
@@ -24,9 +23,9 @@ public class Entity {
 	 * Builds and Entity defining his initial position
 	 * 
 	 * @param x
-	 * 			initial x position
+	 * 		initial x position
 	 * @param y
-	 * 			initial y position
+	 * 		initial y position
 	 */
 	public Entity(float x, float y) {
 		this.xPosition = x;
@@ -47,13 +46,13 @@ public class Entity {
 	 * sets the hitbox relative to the offset of the entity
 	 * 
 	 * @param HITBOX_W_OFFSET
-	 * 					hitbox width offset
+	 * 		hitbox width offset
 	 * @param HITBOX_H_OFFSET
-	 * 					hitbox height offset
+	 * 		hitbox height offset
 	 * @param HITBOX_X_OFFSET
-	 * 					hitbox x offset
+	 * 		hitbox x offset
 	 * @param HITBOX_Y_OFFSET
-	 * 					hitbox y offset
+	 * 		hitbox y offset
 	 */
 	protected void initHitBox(int HITBOX_W_OFFSET, int HITBOX_H_OFFSET, int HITBOX_X_OFFSET, int HITBOX_Y_OFFSET) {
 		this.hitBox = new Rectangle2D.Float(xPosition + HITBOX_X_OFFSET, 
@@ -66,9 +65,9 @@ public class Entity {
 	 * updates the position of the hitbox applying the offsets
 	 * 
 	 * @param HITBOX_X_OFFSET
-	 * 					hitbox x offset
+	 * 		hitbox x offset
 	 * @param HITBOX_Y_OFFSET
-	 * 					hitbox y offset
+	 * 		hitbox y offset
 	 */
 	protected void updateHitBox(int HITBOX_X_OFFSET, int HITBOX_Y_OFFSET) {
 		this.hitBox.x = (xPosition + HITBOX_X_OFFSET);
@@ -88,9 +87,9 @@ public class Entity {
 	 * Draws the current sprite at the current coordinates
 	 * 
 	 * @param g
-	 * 			java drawing object
+	 * 		java drawing object
 	 * @param offset
-	 * 			current offset
+	 * 		current offset
 	 */
 	public void draw(Graphics2D g, int offset) {}
 	

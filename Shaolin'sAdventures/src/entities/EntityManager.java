@@ -9,7 +9,6 @@ import levels.LevelManager;
 import main.Game;
 
 /**
- * 
  * Represents the class which manages the current entities
  * relative to the current level
  * 
@@ -25,9 +24,9 @@ public class EntityManager {
 	 * and the Game
 	 * 
 	 * @param game
-	 * 				reference at the current Game class
+	 * 		reference at the current Game class
 	 * @param levelManager
-	 * 				reference at the LevelManager
+	 * 		reference at the LevelManager
 	 */
 	public EntityManager(Game game, LevelManager levelManager) {	
 		this.game = game;
@@ -48,7 +47,7 @@ public class EntityManager {
 	 * the current entities
 	 * 
 	 * @param playerHitBox
-	 * 					hitbox of the player
+	 * 		hitbox of the player
 	 */
 	public void checkHit(Rectangle2D.Float playerHitBox) {
 		for(Entity e: currentEntities) {
@@ -70,9 +69,9 @@ public class EntityManager {
 	 * Draws every entity currently existing
 	 * 
 	 * @param g
-	 * 			java drawing object
+	 * 		java drawing object
 	 * @param offset
-	 * 			current offset
+	 * 		current offset
 	 */
 	public void draw (Graphics2D g, int offset) {	
 		for(Entity e: currentEntities) {

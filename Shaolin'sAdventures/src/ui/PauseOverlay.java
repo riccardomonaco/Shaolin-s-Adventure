@@ -129,10 +129,4 @@ public class PauseOverlay extends State implements StateMethods{
 			b.reset();
 		}
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }

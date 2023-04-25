@@ -13,20 +13,6 @@ public class MouseInputManager implements MouseListener {
 	public MouseInputManager(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
 	}
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		switch(Gamestate.gameState) {
-			case MENU:
-				this.gamePanel.getGame().getMenu().mouseClicked(e);
-				break;
-			case PLAYING:
-				this.gamePanel.getGame().getMenu().mouseClicked(e);
-				break;
-			default:
-				break;
-		}
-	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -69,6 +55,12 @@ public class MouseInputManager implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}

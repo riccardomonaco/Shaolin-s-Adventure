@@ -12,7 +12,7 @@ import static utils.Constants.PlayerConstants.HITBOX_X_OFFSET;
 import static utils.Constants.PlayerConstants.HITBOX_Y_OFFSET;
 
 /**
- * This represent an implementation of {@link src.entities.Entity}
+ * This represent an extension of {@link entities.Entity}
  * 
  * This is a type of entity, specifically a Cop, an enemy
  * 
@@ -29,9 +29,9 @@ public class Cop extends Entity{
 	 * 
 	 * 
 	 * @param initXPosition
-	 * 					initial x position
+	 * 		initial x position
 	 * @param initYPosition
-	 * 					initial y position
+	 * 		initial y position
 	 */
 	public Cop(int initXPosition, int initYPosition) {
 		super(initXPosition, initYPosition);

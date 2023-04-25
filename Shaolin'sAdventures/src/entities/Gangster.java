@@ -12,7 +12,7 @@ import static utils.Constants.PlayerConstants.HITBOX_X_OFFSET;
 import static utils.Constants.PlayerConstants.HITBOX_Y_OFFSET;
 
 /**
- * This represent an implementation of {@link src.entities.Entity}
+ * This represent an extension of {@link src.entities.Entity}
  * 
  * This is a type of entity, specifically a Gangster, an enemy
  * 
@@ -27,9 +27,9 @@ public class Gangster extends Entity{
 	 * 
 	 * 
 	 * @param initXPosition
-	 * 					initial x position
+	 * 		initial x position
 	 * @param initYPosition
-	 * 					initial y position
+	 * 		initial y position
 	 */
 	public Gangster(int initXPosition, int initYPosition) {
 		super(initXPosition, initYPosition);

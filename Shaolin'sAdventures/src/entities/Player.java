@@ -15,7 +15,7 @@ import static utils.Constants.PanelConstants.*;
 import static utils.HelpMethods.*;
 
 /**
- * This represent an implementation of {@link src.entities.Entity}
+ * This represent an extension of {@link src.entities.Entity}
  * 
  * This represent the Player implementation
  *
@@ -99,7 +99,7 @@ public class Player extends Entity{
 	 * Sets the going right reference
 	 * 
 	 * @param value
-	 * 			direction related boolean
+	 * 		direction related boolean
 	 */
 	public void setRight(boolean value) {
 		this.goingRight = value;
@@ -109,7 +109,7 @@ public class Player extends Entity{
 	 * Sets the going left reference
 	 * 
 	 * @param value
-	 * 			direction related boolean
+	 * 		direction related boolean
 	 */
 	public void setLeft(boolean value) {
 		this.goingLeft = value;
@@ -119,7 +119,7 @@ public class Player extends Entity{
 	 * Sets the jump reference
 	 * 
 	 * @param value
-	 * 			jump related boolean
+	 * 		jump related boolean
 	 */
 	public void setJump(boolean value) {
 		this.isJumping = value;
@@ -181,7 +181,7 @@ public class Player extends Entity{
 	 * and updates his position
 	 * 
 	 * @param xSpeed
-	 * 			player x shift
+	 * 		player x shift
 	 */
 	private void updateXPos(float xSpeed) {
 		if(canMoveHere(hitBox.x + xSpeed, hitBox.y, hitBox.width, hitBox.height, currentLevel.getMap())) xPosition += xSpeed;
@@ -239,7 +239,7 @@ public class Player extends Entity{
 	 * Set the current level 
 	 * 
 	 * @param level
-	 * 			level to be set
+	 * 		level to be set
 	 */
 	public void setCurrentLevel(Level level) {
 		this.currentLevel = level;
