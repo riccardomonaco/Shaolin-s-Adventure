@@ -6,14 +6,28 @@ import java.awt.event.MouseListener;
 import gamestates.Gamestate;
 import main.GamePanel;
 
+/**
+ * This represent an implementation of MouseListener
+ * 
+ * This manages the keyboard inputs
+ *
+ */
 public class MouseInputManager implements MouseListener {
 
 	private GamePanel gamePanel;
 	
+	/**
+	 * Builds a MouseInputManager
+	 * 
+	 * @param game panel containing the game object
+	 */
 	public MouseInputManager(GamePanel gamePanel) {
 		this.gamePanel = gamePanel;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		switch(Gamestate.gameState) {
@@ -26,10 +40,12 @@ public class MouseInputManager implements MouseListener {
 			else this.gamePanel.getGame().getPlaying().mousePressed(e);
 		default:
 			break;
-	}
-		
+		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		switch(Gamestate.gameState) {
@@ -43,26 +59,24 @@ public class MouseInputManager implements MouseListener {
 			break;
 		default:
 			break;
-	}
-		
+		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent e) {}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent e) {}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void mouseClicked(MouseEvent e) {}
 }

@@ -6,22 +6,37 @@ import java.awt.event.KeyListener;
 import gamestates.Gamestate;
 import main.GamePanel;
 
+/**
+ * This represent an implementation of KeyListener
+ * 
+ * This manages the keyboard inputs
+ *
+ */
 public class KeysInputManager implements KeyListener{
 	
 	private GamePanel gamePanel;
 	
+	/**
+	 * Builds a KeysInputManager
+	 * 
+	 * @param game panel containing the game object
+	 */
 	public KeysInputManager(GamePanel gamePanel) {
-		
 		this.gamePanel = gamePanel;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_A:
 			switch(Gamestate.gameState) {
@@ -72,6 +87,7 @@ public class KeysInputManager implements KeyListener{
 				break;
 			}
 			break;
+			
 		case KeyEvent.VK_ESCAPE:
 			switch (Gamestate.gameState) {
 			case MENU:
@@ -84,9 +100,11 @@ public class KeysInputManager implements KeyListener{
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_A:
 			switch(Gamestate.gameState) {

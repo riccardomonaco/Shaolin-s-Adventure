@@ -1,5 +1,10 @@
 package utils;
 
+/**
+ * This represents a class containing
+ * all the constants for the game
+ *
+ */
 public class Constants {
 	
 	public static class PanelConstants{
