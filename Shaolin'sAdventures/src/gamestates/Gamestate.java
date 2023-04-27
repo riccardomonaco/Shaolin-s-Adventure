@@ -1,7 +1,7 @@
 package gamestates;
 
 /**
- * Different states game can be in
+ * This enum represents the different states that game can be in
  *
  */
 public enum Gamestate {
