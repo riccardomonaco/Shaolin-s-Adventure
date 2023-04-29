@@ -163,10 +163,29 @@ public class Playing extends State implements StateMethods {
 	}
 	
 	/**
+	 * Checks if the player is on the final block of the level
+	 * 
+	 */
+	private void checkPlayerPassed() {
+		if(isFinal(this.player.getHitBox(), this.levelManager.getCurrentLevel().getMap())) {
+			this.levelManager.levelPassed();
+			this.entityManager.setCurrentEntities();
+			this.resetPlaying();
+		}
+	}
+	
+	/**
 	 * resets the playing state
 	 */
 	public void resetPlaying() {
-		this.isPaused = false;
+		this.player = new Player();
+		this.player.setCurrentLevel(levelManager.getCurrentLevel());
+	}
+	
+	/**
+	 * Restarts the playing state
+	 */
+	public void restartPlaying() {
 		this.initClasses();
 	}
 	
@@ -186,6 +205,7 @@ public class Playing extends State implements StateMethods {
 	public void update() {
 		if(!isDead) {
 			if(!isPaused) {
+				this.checkPlayerPassed();
 				this.checkPlayerShot();
 				this.checkPlayerFell();
 				this.checkPlayerHit();

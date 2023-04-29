@@ -22,9 +22,8 @@ public class LevelManager {
 	private Game game;
 	
 	private Level currentLevel;
-	private Level levelOne;
-	private Level levelTwo;
-	private Level levelThree;
+	private Level[] levels;
+	private int levelIndex;
 	
 	private EntityManager entityManager;
 	private HashMap<Integer, BufferedImage> levelSprites;
@@ -37,10 +36,12 @@ public class LevelManager {
 	public LevelManager(Game game) {
 		this.game = game;
 		this.levelSprites = LoadSave.getLevelSprites();
-		this.levelOne = new Level("/maps/levelonemap.txt", "/maps/leveloneentities.txt");
-		this.levelTwo = new Level("/maps/leveltwomap.txt", "/maps/leveltwoentities.txt");
-		this.levelThree = new Level("/maps/levelthreemap.txt", "/maps/levelthreeentities.txt");
-		this.currentLevel = levelThree;
+		this.levelIndex = 0;
+		this.levels = new Level[3];
+		this.levels[0] = new Level("/maps/levelonemap.txt", "/maps/leveloneentities.txt");
+		this.levels[1] = new Level("/maps/leveltwomap.txt", "/maps/leveltwoentities.txt");
+		this.levels[2] = new Level("/maps/levelthreemap.txt", "/maps/levelthreeentities.txt");
+		this.currentLevel = this.levels[this.levelIndex];
 	}
 
 	/**
@@ -50,6 +51,24 @@ public class LevelManager {
 	 */
 	public Level getCurrentLevel() {
 		return this.currentLevel;
+	}
+	
+	/**
+	 * Goes to the next level
+	 * 
+	 */
+	public void levelPassed() {
+		this.levelIndex++;
+		this.currentLevel = this.levels[this.levelIndex];
+	}
+	
+	/**
+	 * Reset the first level
+	 * 
+	 */
+	public void resetLevels() {
+		this.levelIndex = 0;
+		this.currentLevel = this.levels[this.levelIndex];
 	}
 	
 	/**

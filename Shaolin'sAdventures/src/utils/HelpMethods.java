@@ -5,6 +5,7 @@ import static utils.Constants.PanelConstants.*;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
 import java.security.PublicKey;
+import java.util.IllegalFormatCodePointException;
 
 import utils.Constants.PanelConstants;
 import utils.Constants.PlayerConstants;
@@ -54,6 +55,22 @@ public class HelpMethods {
 			default:
 				return true;
 		}
+	}
+	
+	/**
+	 * Checks if an entity is on the block which represent the end
+	 * of the level
+	 * 
+	 * @param hitbox
+	 * 		entity hitbox
+	 * @param map
+	 * 		current level map
+	 * @return boolean
+	 */
+	public static boolean isFinal(Rectangle2D.Float hitbox, int[][] map) {
+		int material = map[(int)(hitbox.x/TILE_SIZE)][(int)(hitbox.y/TILE_SIZE + 1)];
+		if(material == 5) return true;
+		else return false;
 	}
 	
 	/**
