@@ -43,35 +43,35 @@ public class Entity {
 	}
 	
 	/**
-	 * sets the hitbox relative to the offset of the entity
+	 * sets the hitbox relatively at the offset of the entity
 	 * 
-	 * @param HITBOX_W_OFFSET
+	 * @param wOffset
 	 * 		hitbox width offset
-	 * @param HITBOX_H_OFFSET
+	 * @param hOffset
 	 * 		hitbox height offset
-	 * @param HITBOX_X_OFFSET
+	 * @param xOffset
 	 * 		hitbox x offset
-	 * @param HITBOX_Y_OFFSET
+	 * @param yOffset
 	 * 		hitbox y offset
 	 */
-	protected void initHitBox(int HITBOX_W_OFFSET, int HITBOX_H_OFFSET, int HITBOX_X_OFFSET, int HITBOX_Y_OFFSET) {
-		this.hitBox = new Rectangle2D.Float(xPosition + HITBOX_X_OFFSET, 
-											yPosition + HITBOX_Y_OFFSET, 
-											TILE_SIZE - HITBOX_W_OFFSET, 
-											TILE_SIZE - HITBOX_H_OFFSET);
+	protected void initHitBox(int wOffset, int hOffset, int xOffset, int yOffset) {
+		this.hitBox = new Rectangle2D.Float(xPosition + xOffset, 
+											yPosition + yOffset, 
+											TILE_SIZE - wOffset, 
+											TILE_SIZE - hOffset);
 	}
 	
 	/**
 	 * updates the position of the hitbox applying the offsets
 	 * 
-	 * @param HITBOX_X_OFFSET
+	 * @param xOffset
 	 * 		hitbox x offset
-	 * @param HITBOX_Y_OFFSET
+	 * @param yOffset
 	 * 		hitbox y offset
 	 */
-	protected void updateHitBox(int HITBOX_X_OFFSET, int HITBOX_Y_OFFSET) {
-		this.hitBox.x = (xPosition + HITBOX_X_OFFSET);
-		this.hitBox.y = (yPosition + HITBOX_Y_OFFSET);
+	protected void updateHitBox(int xOffset, int yOffset) {
+		this.hitBox.x = (xPosition + xOffset);
+		this.hitBox.y = (yPosition + yOffset);
 	}
 	
     /**
@@ -96,7 +96,7 @@ public class Entity {
 	/**
 	 * Updates the state of the entity
 	 */
-	public void update() {}
+	public void update(int offset) {}
 	
 }
 

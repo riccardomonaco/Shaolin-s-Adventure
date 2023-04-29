@@ -47,7 +47,6 @@ public class Constants {
 	}
 	
 	public static class EnemiesConstants{
-		public static class GangsterConstants{
 			public static final int GANGSTERX = PanelConstants.TILE_SIZE * 2;
 			public static final int GANGSTERY = PanelConstants.TILE_SIZE * 2;
 			
@@ -55,7 +54,16 @@ public class Constants {
 			public static final int HITBOX_H_OFFSET = 8 * PanelConstants.SCALE;
 			public static final int HITBOX_X_OFFSET = 8 * PanelConstants.SCALE;
 			public static final int HITBOX_Y_OFFSET = 5 * PanelConstants.SCALE;
-		}
+	}
+	
+	public static class ObjectsConstants{
+		public static final int BULLET_W = 10 * PanelConstants.SCALE;
+		public static final int BULLET_H = 8 * PanelConstants.SCALE;
+		public static final int BULLET_W_HB = 8 * PanelConstants.SCALE;
+		public static final int BULLET_H_HB = 6 * PanelConstants.SCALE;	
+		
+		public static final int BULLET_X_INIT = 20;
+		public static final int BULLET_Y_INIT = PanelConstants.TILE_SIZE/4;
 	}
 	
 	public static class UI{

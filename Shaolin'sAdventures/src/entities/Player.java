@@ -249,7 +249,7 @@ public class Player extends Entity{
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void update() {
+	public void update(int offset) {
 		this.updatePosition();
 		this.updateHitBox(HITBOX_X_OFFSET, HITBOX_Y_OFFSET);
 		this.setAnimation();

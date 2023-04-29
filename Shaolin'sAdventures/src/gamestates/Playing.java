@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.management.loading.PrivateClassLoader;
 
@@ -144,11 +145,38 @@ public class Playing extends State implements StateMethods {
 	}
 	
 	/**
+	 * Checks if the player has been hit by a bullet
+	 * 
+	 */
+	private void checkPlayerShot() {
+		List<Gangster> gangsters = this.entityManager.currentEntities.stream()
+																	 .filter(p -> p instanceof Gangster)
+																	 .map(Gangster.class::cast)
+																	 .collect(Collectors.toList());
+		for(Gangster g: gangsters) {
+			if(this.player.getHitBox().intersects(g.getBullet().getHitBox())) {
+				this.isDead = true;
+				this.game.getAudioPlayer().stopSoundTrack(AudioPlayer.LEVEL);
+				this.game.getAudioPlayer().playSoundEffects(AudioPlayer.GAMEOVER);
+			}
+		}
+	}
+	
+	/**
 	 * resets the playing state
 	 */
 	public void resetPlaying() {
 		this.isPaused = false;
 		this.initClasses();
+	}
+	
+	/**
+	 * Returns current map offset
+	 * 
+	 * @return current x offset
+	 */
+	public int getCurrentOffset() {
+		return this.currentOffset;
 	}
 
 	/**
@@ -158,12 +186,13 @@ public class Playing extends State implements StateMethods {
 	public void update() {
 		if(!isDead) {
 			if(!isPaused) {
+				this.checkPlayerShot();
 				this.checkPlayerFell();
 				this.checkPlayerHit();
 				this.checkCloseBorder();
 				this.levelManager.update();
 				this.entityManager.update();
-				this.player.update();
+				this.player.update(this.currentOffset);
 			}else {
 				this.pauseOverlay.update();
 			}

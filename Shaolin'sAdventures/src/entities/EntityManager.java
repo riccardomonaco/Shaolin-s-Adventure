@@ -41,27 +41,13 @@ public class EntityManager {
 	public void setCurrentEntities() {
 		this.currentEntities = this.levelManager.getCurrentLevel().getEnemies();
 	}
-	
-	/**
-	 * Checks if the player is touching one of 
-	 * the current entities
-	 * 
-	 * @param playerHitBox
-	 * 		hitbox of the player
-	 */
-	public void checkHit(Rectangle2D.Float playerHitBox) {
-		for(Entity e: currentEntities) {
-			if(playerHitBox.intersects(e.getHitBox())) {
-			}
-		}
-	}
-	
+		
 	/**
 	 * Updates every entity currently existing
 	 */
 	public void update() {
 		for(Entity e: currentEntities) {
-			e.update();
+			e.update(this.game.getPlaying().getCurrentOffset());
 		}
 	}
 	
