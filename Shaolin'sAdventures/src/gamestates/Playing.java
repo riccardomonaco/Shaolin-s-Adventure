@@ -16,6 +16,7 @@ import entities.Gangster;
 import entities.Player;
 import levels.LevelManager;
 import main.Game;
+import ui.GameCompletedOverlay;
 import ui.GameOverOverlay;
 import ui.PauseOverlay;
 
@@ -37,9 +38,11 @@ public class Playing extends State implements StateMethods {
 	private EntityManager entityManager;
 	private PauseOverlay pauseOverlay;
 	private GameOverOverlay gameOverOverlay;
+	private GameCompletedOverlay gameCompletedOverlay;
 
 	public boolean isPaused;
 	public boolean isDead;
+	public boolean isCompleted;
 	
 	private int currentOffset = 0;
 	private int maxOffset = SCREEN_WIDTH * 2;
@@ -66,8 +69,10 @@ public class Playing extends State implements StateMethods {
 		this.player.setCurrentLevel(levelManager.getCurrentLevel());
 		this.pauseOverlay = new PauseOverlay(this.game);
 		this.gameOverOverlay = new GameOverOverlay(this.game);
+		this.gameCompletedOverlay = new GameCompletedOverlay(this.game);
 		this.isPaused = false;
 		this.isDead = false;
+		this.isCompleted = false;
 	}
 	
 	/**
@@ -86,6 +91,15 @@ public class Playing extends State implements StateMethods {
 	 */
 	public GameOverOverlay getGameOverOverlay() {
 		return this.gameOverOverlay;
+	}
+	
+	/**
+	 * Returns the game completed overlay
+	 * 
+	 * @return game completed overlay
+	 */
+	public GameCompletedOverlay getGameCompletedOverlay() {
+		return this.gameCompletedOverlay;
 	}
 	
 	/**
@@ -126,7 +140,7 @@ public class Playing extends State implements StateMethods {
 		for(Entity e: this.entityManager.currentEntities) {
 			if(this.player.getHitBox().intersects(e.getHitBox())) {
 				this.isDead = true;
-				this.game.getAudioPlayer().stopSoundTrack(AudioPlayer.LEVEL);
+				this.game.getAudioPlayer().stopSoundTrack();
 				this.game.getAudioPlayer().playSoundEffects(AudioPlayer.GAMEOVER);
 			}
 		}
@@ -139,7 +153,7 @@ public class Playing extends State implements StateMethods {
 	private void checkPlayerFell() {
 		if(isFellOff(this.player.getHitBox())) {
 			this.isDead = true;
-			this.game.getAudioPlayer().stopSoundTrack(AudioPlayer.LEVEL);
+			this.game.getAudioPlayer().stopSoundTrack();
 			this.game.getAudioPlayer().playSoundEffects(AudioPlayer.GAMEOVER);
 		}
 	}
@@ -156,7 +170,7 @@ public class Playing extends State implements StateMethods {
 		for(Gangster g: gangsters) {
 			if(this.player.getHitBox().intersects(g.getBullet().getHitBox())) {
 				this.isDead = true;
-				this.game.getAudioPlayer().stopSoundTrack(AudioPlayer.LEVEL);
+				this.game.getAudioPlayer().stopSoundTrack();
 				this.game.getAudioPlayer().playSoundEffects(AudioPlayer.GAMEOVER);
 			}
 		}
@@ -169,8 +183,11 @@ public class Playing extends State implements StateMethods {
 	private void checkPlayerPassed() {
 		if(isFinal(this.player.getHitBox(), this.levelManager.getCurrentLevel().getMap())) {
 			this.levelManager.levelPassed();
-			this.entityManager.setCurrentEntities();
-			this.resetPlaying();
+			if(this.isCompleted) this.game.getAudioPlayer().playSoundTrack(AudioPlayer.COMPLETED);
+			else{
+				this.entityManager.setCurrentEntities();
+				this.resetPlaying();
+			}
 		}
 	}
 	
@@ -178,8 +195,11 @@ public class Playing extends State implements StateMethods {
 	 * resets the playing state
 	 */
 	public void resetPlaying() {
+		this.isPaused = false;
 		this.player = new Player();
 		this.player.setCurrentLevel(levelManager.getCurrentLevel());
+		this.levelManager.resetLabel();
+		this.entityManager.resetObjects();
 	}
 	
 	/**
@@ -203,22 +223,27 @@ public class Playing extends State implements StateMethods {
 	 */
 	@Override
 	public void update() {
-		if(!isDead) {
-			if(!isPaused) {
-				this.checkPlayerPassed();
-				this.checkPlayerShot();
-				this.checkPlayerFell();
-				this.checkPlayerHit();
-				this.checkCloseBorder();
-				this.levelManager.update();
-				this.entityManager.update();
-				this.player.update(this.currentOffset);
+		if(!isCompleted) {
+			if(!isDead) {
+				if(!isPaused) {
+					this.checkPlayerPassed();
+					this.checkPlayerShot();
+					this.checkPlayerFell();
+					this.checkPlayerHit();
+					this.checkCloseBorder();
+					this.levelManager.update();
+					this.entityManager.update();
+					this.player.update(this.currentOffset);
+				}else {
+					this.pauseOverlay.update();
+				}
 			}else {
-				this.pauseOverlay.update();
+				this.gameOverOverlay.update();
 			}
 		}else {
-			this.gameOverOverlay.update();
+			this.gameCompletedOverlay.update();
 		}
+
 	}
 	
 	/**
@@ -226,17 +251,12 @@ public class Playing extends State implements StateMethods {
 	 */
 	@Override
 	public void draw(Graphics2D g) {
-		
 		this.levelManager.draw(g, currentOffset);
 		this.entityManager.draw(g, currentOffset);
 		this.player.draw(g, currentOffset);
-		if(isDead) {
-			this.gameOverOverlay.draw(g);
-		}else {
-			if(isPaused) {
-				this.pauseOverlay.draw(g);
-			}
-		}
+		if(this.isCompleted) this.gameCompletedOverlay.draw(g);
+		else if(this.isDead) this.gameOverOverlay.draw(g);
+		else if(this.isPaused) this.pauseOverlay.draw(g);
 	}
 
 	/**
@@ -244,7 +264,6 @@ public class Playing extends State implements StateMethods {
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_A:
 			this.player.setLeft(true);
@@ -256,7 +275,7 @@ public class Playing extends State implements StateMethods {
 			this.player.setJump(true);
 			break;
 		case KeyEvent.VK_ESCAPE:
-			this.isPaused = !isPaused;
+			this.isPaused = !this.isPaused;
 			break;
 		}
 	}
@@ -266,7 +285,6 @@ public class Playing extends State implements StateMethods {
 	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
 		switch(e.getKeyCode()) {
 		case KeyEvent.VK_A:
 			this.player.setLeft(false);

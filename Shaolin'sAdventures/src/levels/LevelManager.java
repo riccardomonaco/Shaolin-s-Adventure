@@ -24,8 +24,8 @@ public class LevelManager {
 	private Level currentLevel;
 	private Level[] levels;
 	private int levelIndex;
+	private int levelLabel;
 	
-	private EntityManager entityManager;
 	private HashMap<Integer, BufferedImage> levelSprites;
 	
 	/**
@@ -37,10 +37,17 @@ public class LevelManager {
 		this.game = game;
 		this.levelSprites = LoadSave.getLevelSprites();
 		this.levelIndex = 0;
+		this.levelLabel = 300;
 		this.levels = new Level[3];
-		this.levels[0] = new Level("/maps/levelonemap.txt", "/maps/leveloneentities.txt");
-		this.levels[1] = new Level("/maps/leveltwomap.txt", "/maps/leveltwoentities.txt");
-		this.levels[2] = new Level("/maps/levelthreemap.txt", "/maps/levelthreeentities.txt");
+		this.levels[0] = new Level("/maps/levelonemap.txt", 
+								   "/maps/leveloneentities.txt",
+								   "/overlays/level1.png");
+		this.levels[1] = new Level("/maps/leveltwomap.txt",
+								   "/maps/leveltwoentities.txt",
+								   "/overlays/level2.png");
+		this.levels[2] = new Level("/maps/levelthreemap.txt",
+								   "/maps/levelthreeentities.txt",
+								   "/overlays/level3.png");
 		this.currentLevel = this.levels[this.levelIndex];
 	}
 
@@ -59,7 +66,11 @@ public class LevelManager {
 	 */
 	public void levelPassed() {
 		this.levelIndex++;
-		this.currentLevel = this.levels[this.levelIndex];
+		if(this.checkGameCompleted()) this.game.getPlaying().isCompleted = true;
+		else {
+			this.levelLabel = 300;
+			this.currentLevel = this.levels[this.levelIndex];
+		}
 	}
 	
 	/**
@@ -68,13 +79,34 @@ public class LevelManager {
 	 */
 	public void resetLevels() {
 		this.levelIndex = 0;
+		this.levelLabel = 300;
 		this.currentLevel = this.levels[this.levelIndex];
 	}
 	
 	/**
+	 * Resets the level label value
+	 * 
+	 */
+	public void resetLabel() {
+		this.levelLabel = 300;
+	}
+	
+	/**
+	 * Returns if the currently completed level was the
+	 * last one
+	 * 
+	 * @return boolean
+	 */
+	public boolean checkGameCompleted() {
+		return this.levelIndex >= this.levels.length;
+	}
+	
+	/**
+	 * Updates the level manager
 	 * 
 	 */
 	public void update() {
+		this.levelLabel--;
 	}
 	
 	/**
@@ -97,6 +129,9 @@ public class LevelManager {
 				row++;
 				y+=TILE_SIZE;			
 			}
+		}
+		if(levelLabel > 0) {
+			this.currentLevel.drawOverlay(g);
 		}
 	}
 }

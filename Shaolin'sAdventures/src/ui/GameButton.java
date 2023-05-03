@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import gamestates.Gamestate;
-import utils.Constants.UI.ButtonsConstants;
+import utils.Constants.ButtonsConstants;
 import utils.LoadSave;
 
 /**

@@ -46,7 +46,7 @@ public class Gangster extends Entity{
 	 * Sets the variables linked to the attacking system
 	 * 
 	 */
-	private void setAttackDefaults() {
+	public void setAttackDefaults() {
 		this.tickAttack = 0;
 		this.speedAttack = 35;
 		this.bullet = new Bullet(this.getHitBox().x - BULLET_X_INIT, this.getHitBox().y + BULLET_Y_INIT, BULLET_W, BULLET_H, "/objects/bullet.png");

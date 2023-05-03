@@ -1,9 +1,9 @@
 package entities;
 
 import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import levels.LevelManager;
 import main.Game;
@@ -40,6 +40,19 @@ public class EntityManager {
 	 */
 	public void setCurrentEntities() {
 		this.currentEntities = this.levelManager.getCurrentLevel().getEnemies();
+	}
+	
+	/**
+	 * Resets the game objects
+	 */
+	public void resetObjects() {
+		List<Gangster> gangsters = this.currentEntities.stream()
+													   .filter(p -> p instanceof Gangster)
+													   .map(Gangster.class::cast)
+													   .collect(Collectors.toList());
+		for(Gangster g: gangsters) {
+			g.setAttackDefaults();
+		}
 	}
 		
 	/**

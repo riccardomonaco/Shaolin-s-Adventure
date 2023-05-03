@@ -43,6 +43,11 @@ public class Constants {
 		public static final int MAP_ROW = PanelConstants.SCREEN_ROW;
 		public static final int MAP_WIDTH = PanelConstants.TILE_SIZE * MAP_COL;
 		public static final int MAP_HEIGTH = PanelConstants.TILE_SIZE * MAP_ROW;
+		
+		public static final int LVL_OVERLAY_W = 64 * PanelConstants.SCALE;
+		public static final int LVL_OVERLAY_H = 64 * PanelConstants.SCALE;
+		public static final int LVL_OVERLAY_X = PanelConstants.SCREEN_WIDTH/2 - LVL_OVERLAY_W/2;
+		public static final int LVL_OVERLAY_Y = 0;
 
 	}
 	
@@ -66,26 +71,24 @@ public class Constants {
 		public static final int BULLET_Y_INIT = PanelConstants.TILE_SIZE/4;
 	}
 	
-	public static class UI{
+	public static class UIConstants{
 		public static final int BG_WIDTH = PanelConstants.SCREEN_WIDTH;
 		public static final int BG_HEIGHT = PanelConstants.SCREEN_HEIGHT;
 		public static final int SPLASH_WIDTH = 128;
-		
-		public static class ButtonsConstants{
-			public static final int MENU_WIDTH = 128 * PanelConstants.SCALE;
-			public static final int MENU_HEIGHT = 128 * PanelConstants.SCALE;
-			public static final int PAUSE_WIDTH = 64 * PanelConstants.SCALE;
-			public static final int PAUSE_HEIGHT = 64 * PanelConstants.SCALE;
-			public static final int PLAY_OFFSET = -275;
-			public static final int QUIT_OFFSET = -10;
-			public static final int HOME_BT_X = (int)PanelConstants.SCREEN_WIDTH/2 - 128;
-			public static final int HOME_BT_Y = (int)PanelConstants.SCREEN_HEIGHT/2 - PanelConstants.TILE_SIZE*3;
-			public static final int RESTART_BT_X = (int)PanelConstants.SCREEN_WIDTH/2;
-			public static final int RESTART_BT_Y = (int)PanelConstants.SCREEN_HEIGHT/2 - PanelConstants.TILE_SIZE*3;
-			public static final int VOLUME_BT_X = (int)PanelConstants.SCREEN_WIDTH/2 - 64;
-			public static final int VOLUME_BT_Y = (int)PanelConstants.SCREEN_HEIGHT/2 - PanelConstants.TILE_SIZE;
-		}
 	}
 	
-	
+	public static class ButtonsConstants{
+		public static final int MENU_WIDTH = 128 * PanelConstants.SCALE;
+		public static final int MENU_HEIGHT = 128 * PanelConstants.SCALE;
+		public static final int PAUSE_WIDTH = 64 * PanelConstants.SCALE;
+		public static final int PAUSE_HEIGHT = 64 * PanelConstants.SCALE;
+		public static final int PLAY_OFFSET = -275;
+		public static final int QUIT_OFFSET = -10;
+		public static final int HOME_BT_X = (int)PanelConstants.SCREEN_WIDTH/2 - 128;
+		public static final int HOME_BT_Y = (int)PanelConstants.SCREEN_HEIGHT/2 - PanelConstants.TILE_SIZE*3;
+		public static final int RESTART_BT_X = (int)PanelConstants.SCREEN_WIDTH/2;
+		public static final int RESTART_BT_Y = (int)PanelConstants.SCREEN_HEIGHT/2 - PanelConstants.TILE_SIZE*3;
+		public static final int VOLUME_BT_X = (int)PanelConstants.SCREEN_WIDTH/2 - 64;
+		public static final int VOLUME_BT_Y = (int)PanelConstants.SCREEN_HEIGHT/2 - PanelConstants.TILE_SIZE;
+	}
 }

@@ -10,7 +10,7 @@ import ui.GameButton;
  * Represents the generic state of the game
  *
  */
-public class State {
+public abstract class State {
 	
 	protected Game game;
 	

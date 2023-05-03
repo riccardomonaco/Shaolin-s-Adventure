@@ -16,7 +16,7 @@ import static utils.Constants.PanelConstants.*;
 
 import utils.LoadSave;
 import utils.Constants.PanelConstants;
-import utils.Constants.UI.ButtonsConstants;
+import utils.Constants.ButtonsConstants;
 
 /**
  * This represents the overlay displayed on pause screen

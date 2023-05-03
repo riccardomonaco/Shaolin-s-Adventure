@@ -10,8 +10,8 @@ import main.Game;
 import ui.GameButton;
 import utils.LoadSave;
 import utils.Constants.PanelConstants;
-import utils.Constants.UI;
-import utils.Constants.UI.ButtonsConstants;
+import utils.Constants.UIConstants;
+import utils.Constants.ButtonsConstants;
 
 /**
  * This represent an extension of {@link gamestates.State}
@@ -91,7 +91,7 @@ public class Menu extends State implements StateMethods{
 	@Override
 	public void draw(Graphics2D g) {
 		g.drawImage(this.menuBackground, 0, 0, PanelConstants.SCREEN_WIDTH, PanelConstants.SCREEN_HEIGHT, null);
-		g.drawImage(this.splashLogo, PanelConstants.SCREEN_WIDTH/2 - UI.SPLASH_WIDTH, PanelConstants.TILE_SIZE, ButtonsConstants.MENU_WIDTH, ButtonsConstants.MENU_HEIGHT, null);
+		g.drawImage(this.splashLogo, PanelConstants.SCREEN_WIDTH/2 - UIConstants.SPLASH_WIDTH, PanelConstants.TILE_SIZE, ButtonsConstants.MENU_WIDTH, ButtonsConstants.MENU_HEIGHT, null);
 		for(GameButton button: menuButtons) {
 			button.draw(g);
 		}

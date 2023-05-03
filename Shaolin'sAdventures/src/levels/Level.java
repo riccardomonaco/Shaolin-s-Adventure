@@ -2,6 +2,8 @@ package levels;
 
 import static utils.Constants.PanelConstants.*;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import entities.Entity;
@@ -18,6 +20,7 @@ public class Level {
 	
 	private int[][] map;
 	private List<Entity> enemies;
+	private BufferedImage levelOverlay;
 	
 	/**
 	 * Builds a new level loading the map
@@ -27,10 +30,13 @@ public class Level {
 	 * 		map file path
 	 * @param ePath
 	 * 		enemies map file path
+	 * @param imgPath
+	 * 		level overlay file path
 	 */
-	public Level(String mPath, String ePath) {
+	public Level(String mPath, String ePath, String imgPath) {
 		this.map = LoadSave.loadMap(mPath);
 		this.enemies = LoadSave.loadEnemies(ePath);
+		this.levelOverlay = LoadSave.getImage(imgPath);
 	}
 	
 	/**
@@ -62,6 +68,15 @@ public class Level {
 		return this.enemies;
 	}
 	
+	/**
+	 * Draws the level label
+	 * 
+	 * @param g
+	 * 		java drawing object
+	 */
+	public void drawOverlay(Graphics2D g) {
+		g.drawImage(levelOverlay, LVL_OVERLAY_X, LVL_OVERLAY_Y, LVL_OVERLAY_W, LVL_OVERLAY_H, null);
+	}
 	
 	/**
 	 * Returns the actual window with map tiles

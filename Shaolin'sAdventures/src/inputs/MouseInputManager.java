@@ -35,7 +35,8 @@ public class MouseInputManager implements MouseListener {
 			this.gamePanel.getGame().getMenu().mousePressed(e);
 			break;
 		case PLAYING:
-			if(this.gamePanel.getGame().getPlaying().isDead) this.gamePanel.getGame().getPlaying().getGameOverOverlay().mousePressed(e);
+			if(this.gamePanel.getGame().getPlaying().isCompleted) this.gamePanel.getGame().getPlaying().getGameCompletedOverlay().mousePressed(e);
+			else if(this.gamePanel.getGame().getPlaying().isDead) this.gamePanel.getGame().getPlaying().getGameOverOverlay().mousePressed(e);
 			else if(this.gamePanel.getGame().getPlaying().isPaused) this.gamePanel.getGame().getPlaying().getPauseOverlay().mousePressed(e);
 			else this.gamePanel.getGame().getPlaying().mousePressed(e);
 		default:
@@ -53,7 +54,8 @@ public class MouseInputManager implements MouseListener {
 			this.gamePanel.getGame().getMenu().mouseReleased(e);
 			break;
 		case PLAYING:
-			if(this.gamePanel.getGame().getPlaying().isDead) this.gamePanel.getGame().getPlaying().getGameOverOverlay().mouseReleased(e);
+			if(this.gamePanel.getGame().getPlaying().isCompleted) this.gamePanel.getGame().getPlaying().getGameCompletedOverlay().mouseReleased(e);
+			else if(this.gamePanel.getGame().getPlaying().isDead) this.gamePanel.getGame().getPlaying().getGameOverOverlay().mouseReleased(e);
 			else if(this.gamePanel.getGame().getPlaying().isPaused) this.gamePanel.getGame().getPlaying().getPauseOverlay().mouseReleased(e);
 			else this.gamePanel.getGame().getPlaying().mouseReleased(e);
 			break;
