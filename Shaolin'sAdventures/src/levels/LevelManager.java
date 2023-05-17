@@ -2,7 +2,9 @@ package levels;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import entities.EntityManager;
 import main.Game;
@@ -12,21 +14,17 @@ import static utils.Constants.PanelConstants.*;
 import static utils.Constants.LevelConstants.*;
 
 /**
- * This represent a level manager which contains 
+ * This represents a level manager which contains
  * and manages all the levels
- * 
  *
  */
 public class LevelManager {
 
-	private Game game;
-	
-	private Level currentLevel;
-	private Level[] levels;
+	private final Game game;
+	private final List<Level> levels;
 	private int levelIndex;
 	private int levelLabel;
-	
-	private HashMap<Integer, BufferedImage> levelSprites;
+	private final HashMap<Integer, BufferedImage> levelSprites;
 	
 	/**
 	 * Builds a new level manager
@@ -38,17 +36,30 @@ public class LevelManager {
 		this.levelSprites = LoadSave.getLevelSprites();
 		this.levelIndex = 0;
 		this.levelLabel = 300;
-		this.levels = new Level[3];
-		this.levels[0] = new Level("/maps/levelonemap.txt", 
-								   "/maps/leveloneentities.txt",
-								   "/overlays/level1.png");
-		this.levels[1] = new Level("/maps/leveltwomap.txt",
-								   "/maps/leveltwoentities.txt",
-								   "/overlays/level2.png");
-		this.levels[2] = new Level("/maps/levelthreemap.txt",
-								   "/maps/levelthreeentities.txt",
-								   "/overlays/level3.png");
-		this.currentLevel = this.levels[this.levelIndex];
+		this.levels = new ArrayList<>(3);
+		this.initLevels();
+	}
+
+	/**
+	 * Initializes the existing levels
+	 *
+	 */
+	private void initLevels(){
+		this.levels.add(
+				new Level("/maps/levelonemap.txt",
+						"/maps/leveloneentities.txt",
+						"/overlays/level1.png")
+		);
+		this.levels.add(
+				new Level("/maps/leveltwomap.txt",
+						"/maps/leveltwoentities.txt",
+						"/overlays/level2.png")
+		);
+		this.levels.add(
+				new Level("/maps/levelthreemap.txt",
+						"/maps/levelthreeentities.txt",
+						"/overlays/level3.png")
+		);
 	}
 
 	/**
@@ -57,7 +68,7 @@ public class LevelManager {
 	 * @return current level
 	 */
 	public Level getCurrentLevel() {
-		return this.currentLevel;
+		return this.levels.get(levelIndex);
 	}
 	
 	/**
@@ -67,10 +78,7 @@ public class LevelManager {
 	public void levelPassed() {
 		this.levelIndex++;
 		if(this.checkGameCompleted()) this.game.getPlaying().isCompleted = true;
-		else {
-			this.levelLabel = 300;
-			this.currentLevel = this.levels[this.levelIndex];
-		}
+		else this.resetLabel();
 	}
 	
 	/**
@@ -80,7 +88,6 @@ public class LevelManager {
 	public void resetLevels() {
 		this.levelIndex = 0;
 		this.levelLabel = 300;
-		this.currentLevel = this.levels[this.levelIndex];
 	}
 	
 	/**
@@ -98,7 +105,7 @@ public class LevelManager {
 	 * @return boolean
 	 */
 	public boolean checkGameCompleted() {
-		return this.levelIndex >= this.levels.length;
+		return this.levelIndex >= this.levels.toArray().length;
 	}
 	
 	/**
@@ -121,7 +128,7 @@ public class LevelManager {
 	public void draw (Graphics2D g, int offset) {
 		int col = 0, row = 0, x = 0 , y = 0;
 		while(col < MAP_COL && row < MAP_ROW) {
-			g.drawImage(levelSprites.get(this.currentLevel.getMap()[col][row]), x - offset, y, TILE_SIZE, TILE_SIZE, null);
+			g.drawImage(levelSprites.get(this.levels.get(levelIndex).getMap()[col][row]), x - offset, y, TILE_SIZE, TILE_SIZE, null);
 			col++;
 			x+=TILE_SIZE;
 			if(col == MAP_COL) {
@@ -131,7 +138,7 @@ public class LevelManager {
 			}
 		}
 		if(levelLabel > 0) {
-			this.currentLevel.drawOverlay(g);
+			this.levels.get(levelIndex).drawOverlay(g);
 		}
 	}
 }

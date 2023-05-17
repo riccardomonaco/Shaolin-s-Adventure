@@ -9,7 +9,7 @@ import static utils.Constants.PanelConstants.*;
  * Represents the generic entity of the game
  * 
  */
-public class Entity {
+public abstract class Entity {
 
 	protected float xPosition;
 	protected float yPosition;

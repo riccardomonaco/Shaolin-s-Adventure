@@ -87,8 +87,7 @@ public class Game implements Runnable{
 
 	/**
 	 * Runs the main game loop
-	 * 
-	 * updates and draws the game elements based
+	 * Updates and draws the game elements based
 	 * on a specific time interval
 	 * 
 	 */
