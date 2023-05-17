@@ -263,4 +263,20 @@ public class Player extends Entity{
 	public void draw(Graphics2D g, int currentOffset) {
 		g.drawImage(playerAnimations.get(playerAction)[indexAnimation], (int)xPosition - currentOffset, (int)yPosition, TILE_SIZE, TILE_SIZE, null);
 	}
+
+	/**
+	 * Test purposes method which
+	 * returns the player speed
+	 *
+	 * @return player speed
+	 */
+	public float getPlayerSpeed(){ return this.playerSpeed; }
+
+	/**
+	 * Test purposes method which
+	 * returns the player x coordinate
+	 *
+	 * @return player x coordinate
+	 */
+	public float getPlayerX(){ return this.xPosition; }
 }

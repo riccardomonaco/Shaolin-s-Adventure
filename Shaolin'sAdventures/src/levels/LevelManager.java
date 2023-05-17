@@ -141,4 +141,14 @@ public class LevelManager {
 			this.levels.get(levelIndex).drawOverlay(g);
 		}
 	}
+
+	/**
+	 * Test purposes method that
+	 * returns the list of levels
+	 *
+	 * @return list of levels
+	 */
+	public List<Level> getLevels(){
+		return this.levels;
+	}
 }
