@@ -169,8 +169,7 @@ public class Player extends Entity{
 	 * Sets the jump relative airSpeed
 	 */
 	private void jump() {
-		if(inAir) return;
-		else {
+		if(!inAir) {
 			inAir = true;
 			airSpeed = jumpSpeed;
 		}
