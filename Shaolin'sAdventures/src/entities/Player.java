@@ -15,7 +15,7 @@ import static utils.Constants.PanelConstants.*;
 import static utils.HelpMethods.*;
 
 /**
- * This represent an extension of {@link src.entities.Entity}
+ * This represent an extension of {@link entities.Entity}
  * 
  * This represent the Player implementation
  *
