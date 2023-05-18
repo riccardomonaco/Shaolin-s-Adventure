@@ -44,7 +44,7 @@ public abstract class Entity {
 	
 	/**
 	 * sets the hitbox relatively at the offset of the entity
-	 * 
+	 *
 	 * @param wOffset
 	 * 		hitbox width offset
 	 * @param hOffset
@@ -97,6 +97,21 @@ public abstract class Entity {
 	 * Updates the state of the entity
 	 */
 	public void update(int offset) {}
+
+	/**
+	 * Test purposes method which forcibly
+	 * sets the entity position
+	 *
+	 * @param x
+	 * 		x position
+	 * @param y
+	 * 		y position
+	 */
+	public void setPosition(int x, int y){
+		this.xPosition = x;
+		this.yPosition = y;
+		this.updateHitBox(0, 0);
+	}
 	
 }
 

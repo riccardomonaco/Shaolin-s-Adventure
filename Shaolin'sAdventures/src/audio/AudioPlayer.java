@@ -10,6 +10,8 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents an audio player which has to 
@@ -26,8 +28,8 @@ public class AudioPlayer {
 	
 	private int currentSongId;
 	
-	private Clip[] soundTracks;
-	private Clip[] soundEffects;
+	private List<Clip> soundTracks;
+	private List<Clip> soundEffects;
 	
 	private boolean isMuted;
 	
@@ -49,9 +51,9 @@ public class AudioPlayer {
      */
 	private void loadSoundTracks(){
 		String[] soundNames = {"menu", "level", "game_completed"};
-		this.soundTracks = new Clip[soundNames.length];
-		for(int i = 0; i < soundNames.length; i++) {
-			this.soundTracks[i] = getAudio(soundNames[i]);
+		this.soundTracks = new ArrayList<>(soundNames.length);
+		for (String soundName : soundNames) {
+			this.soundTracks.add(getAudio(soundName));
 		}
 	}
 	
@@ -65,9 +67,9 @@ public class AudioPlayer {
 		 * and then populates the Clip array
 		 */
 		String[] soundNames = {"game_over"};
-		this.soundEffects = new Clip[soundNames.length];	
-		for(int i = 0; i < soundNames.length; i++) {
-			this.soundEffects[i] = getAudio(soundNames[i]);
+		this.soundEffects = new ArrayList<>(soundNames.length);
+		for (String soundName : soundNames) {
+			this.soundEffects.add(getAudio(soundName));
 		}
 	}
 	
@@ -112,8 +114,8 @@ public class AudioPlayer {
 	public void playSoundTrack(int sID) {
 		this.stopSoundTrack();
 		this.currentSongId = sID;
-		this.soundTracks[currentSongId].setMicrosecondPosition(0);
-		this.soundTracks[currentSongId].loop(Clip.LOOP_CONTINUOUSLY);
+		this.soundTracks.get(currentSongId).setMicrosecondPosition(0);
+		this.soundTracks.get(currentSongId).loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	
 	/**
@@ -121,7 +123,7 @@ public class AudioPlayer {
 	 * 
 	 */
 	public void stopSoundTrack() {
-		this.soundTracks[currentSongId].stop();
+		this.soundTracks.get(currentSongId).stop();
 	}
 	
 	 /**
@@ -131,7 +133,7 @@ public class AudioPlayer {
 	  * 	the id of the effect to be played
 	  */
 	public void playSoundEffects(int sID) {
-		this.soundEffects[sID].setMicrosecondPosition(0);
-		this.soundEffects[sID].start();
+		this.soundEffects.get(sID).setMicrosecondPosition(0);
+		this.soundEffects.get(sID).start();
 	}
 }

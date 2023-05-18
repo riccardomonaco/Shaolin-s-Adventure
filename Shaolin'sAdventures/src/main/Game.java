@@ -8,17 +8,17 @@ import gamestates.Menu;
 import gamestates.Playing;
 
 public class Game implements Runnable{
-	
+
 	private final int FPS = 60;	// frames per second
 	private final int UPS = 150; // updates per second
-	
-	private GameWindow gameWindow;
-	private GamePanel gamePanel;
+
+	private final GameWindow gameWindow;
+	private final GamePanel gamePanel;
 	private Thread gameThread;
 	
-	private Playing playingState;
-	private Menu menuState;
-	private AudioPlayer audioPlayer;
+	private final Playing playingState;
+	private final Menu menuState;
+	private final AudioPlayer audioPlayer;
 	
 	/**
 	 * Builds a new game creating the states
@@ -50,18 +50,12 @@ public class Game implements Runnable{
 	 * 
 	 */
 	public void update() {
-		switch(Gamestate.gameState) {
-		case MENU:
-			menuState.update();
-			break;
-		case PLAYING:
-			playingState.update();
-			break;
-		case QUIT:
-			System.exit(0);
-			break;
-		default:
-			break;
+		switch (Gamestate.gameState) {
+			case MENU -> menuState.update();
+			case PLAYING -> playingState.update();
+			case QUIT -> System.exit(0);
+			default -> {
+			}
 		}
 	}
 	
@@ -74,14 +68,10 @@ public class Game implements Runnable{
 	 */
 	public void render(Graphics2D g) {
 		switch (Gamestate.gameState) {
-		case MENU:
-			menuState.draw(g);
-			break;
-		case PLAYING:
-			playingState.draw(g);
-			break;
-		default:
-			break;		
+			case MENU -> menuState.draw(g);
+			case PLAYING -> playingState.draw(g);
+			default -> {
+			}
 		}
 	}
 

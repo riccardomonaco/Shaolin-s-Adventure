@@ -119,6 +119,15 @@ public class Playing extends State implements StateMethods {
 	public LevelManager getLevelManager() {
 		return this.levelManager;
 	}
+
+	/**
+	 * Returns the entity manager
+	 *
+	 * @return entity manager
+	 */
+	public EntityManager getEntityManager() {
+		return this.entityManager;
+	}
 	
 	/**
 	 * Checks if the next player move will collide
@@ -264,19 +273,11 @@ public class Playing extends State implements StateMethods {
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		switch(e.getKeyCode()) {
-		case KeyEvent.VK_A:
-			this.player.setLeft(true);
-			break;
-		case KeyEvent.VK_D:
-			this.player.setRight(true);
-			break;
-		case KeyEvent.VK_SPACE:
-			this.player.setJump(true);
-			break;
-		case KeyEvent.VK_ESCAPE:
-			this.isPaused = !this.isPaused;
-			break;
+		switch (e.getKeyCode()) {
+			case KeyEvent.VK_A -> this.player.setLeft(true);
+			case KeyEvent.VK_D -> this.player.setRight(true);
+			case KeyEvent.VK_SPACE -> this.player.setJump(true);
+			case KeyEvent.VK_ESCAPE -> this.isPaused = !this.isPaused;
 		}
 	}
 
@@ -285,17 +286,11 @@ public class Playing extends State implements StateMethods {
 	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
-		switch(e.getKeyCode()) {
-		case KeyEvent.VK_A:
-			this.player.setLeft(false);
-			break;
-		case KeyEvent.VK_D:
-			this.player.setRight(false);
-			break;
-		case KeyEvent.VK_SPACE:
-			this.player.setJump(false);
-			break;
-		}		
+		switch (e.getKeyCode()) {
+			case KeyEvent.VK_A -> this.player.setLeft(false);
+			case KeyEvent.VK_D -> this.player.setRight(false);
+			case KeyEvent.VK_SPACE -> this.player.setJump(false);
+		}
 	}
 
 	/**
