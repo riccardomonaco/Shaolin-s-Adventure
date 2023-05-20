@@ -42,5 +42,19 @@ public class Bullet extends GameObject{
 	public void update() {
 		this.updateHitBox();
 		this.updatePosition();
+		System.out.println(this.currentXPosition);
+	}
+
+	/**
+	 * Test purposes method which
+	 * sets the bullet position
+	 *
+	 * @param x
+	 * 		x position
+	 */
+	public void setPosition(int x, int y) {
+		this.currentXPosition = x;
+		this.initYPosition = y;
+		this.updateHitBox();
 	}
 }

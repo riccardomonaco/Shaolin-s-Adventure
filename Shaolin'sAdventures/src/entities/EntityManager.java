@@ -49,7 +49,7 @@ public class EntityManager {
 		List<Gangster> gangsters = this.currentEntities.stream()
 													   .filter(p -> p instanceof Gangster)
 													   .map(Gangster.class::cast)
-													   .collect(Collectors.toList());
+													   .toList();
 		for(Gangster g: gangsters) {
 			g.setAttackDefaults();
 		}

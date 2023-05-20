@@ -23,7 +23,7 @@ public class LevelManager {
 	private final Game game;
 	private final List<Level> levels;
 	private int levelIndex;
-	private int levelLabel;
+	private int levelLabelTicks;
 	private final HashMap<Integer, BufferedImage> levelSprites;
 	
 	/**
@@ -35,7 +35,7 @@ public class LevelManager {
 		this.game = game;
 		this.levelSprites = LoadSave.getLevelSprites();
 		this.levelIndex = 0;
-		this.levelLabel = 300;
+		this.levelLabelTicks = 300;
 		this.levels = new ArrayList<>(3);
 		this.initLevels();
 	}
@@ -87,7 +87,7 @@ public class LevelManager {
 	 */
 	public void resetLevels() {
 		this.levelIndex = 0;
-		this.levelLabel = 300;
+		this.levelLabelTicks = 300;
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class LevelManager {
 	 * 
 	 */
 	public void resetLabel() {
-		this.levelLabel = 300;
+		this.levelLabelTicks = 300;
 	}
 	
 	/**
@@ -107,19 +107,19 @@ public class LevelManager {
 	public boolean checkGameCompleted() {
 		return this.levelIndex >= this.levels.toArray().length;
 	}
-	
+
 	/**
 	 * Updates the level manager
-	 * 
+	 *
 	 */
 	public void update() {
-		this.levelLabel--;
+		this.levelLabelTicks--;
 	}
-	
+
 	/**
 	 * Draws the current level map tiles based
 	 * on the current window offset
-	 * 
+	 *
 	 * @param g
 	 * 		java drawing object
 	 * @param offset
@@ -134,10 +134,10 @@ public class LevelManager {
 			if(col == MAP_COL) {
 				col = 0; x = 0 ;
 				row++;
-				y+=TILE_SIZE;			
+				y+=TILE_SIZE;
 			}
 		}
-		if(levelLabel > 0) {
+		if(levelLabelTicks > 0) {
 			this.levels.get(levelIndex).drawOverlay(g);
 		}
 	}
@@ -151,4 +151,13 @@ public class LevelManager {
 	public List<Level> getLevels(){
 		return this.levels;
 	}
+
+	/**
+	 * Test purposes method that
+	 * sets the current level
+	 */
+	public void setLevel(int level) {
+		this.levelIndex = level;
+	}
+
 }

@@ -12,7 +12,7 @@ import static utils.Constants.PlayerConstants.*;
 import static utils.Constants.ObjectsConstants.*;
 
 /**
- * This represent an extension of {@link src.entities.Entity}
+ * This represents an extension of {@link entities.Entity}
  * 
  * This is a type of entity, specifically a Gangster, an enemy
  * 
@@ -102,5 +102,16 @@ public class Gangster extends Entity{
 	public void draw(Graphics2D g, int offset) {
 		g.drawImage(gangsterAnimations[this.indexAnimation], (int)this.xPosition - offset, (int)this.yPosition, TILE_SIZE, TILE_SIZE, null);
 		if(this.bullet.getStatus())	this.bullet.draw(g, offset);
+	}
+
+	/**
+	 * Test purposes method which
+	 * sets the bullet position
+	 *
+	 * @param x
+	 * 		x position
+	 */
+	public void setBulletPosition(int x, int y) {
+		this.bullet.setPosition(x, y);
 	}
 }

@@ -24,11 +24,11 @@ import static utils.HelpMethods.*;
 import static utils.Constants.PanelConstants.*;
 
 /**
- * This represent an extension of {@link gamestates.State}
+ * This represents an extension of {@link gamestates.State}
  * 
  * and an implementation of {@link gamestates.StateMethods}
  * 
- * This represent the playing state
+ * This represents the playing state
  *
  */
 public class Playing extends State implements StateMethods {
@@ -175,7 +175,7 @@ public class Playing extends State implements StateMethods {
 		List<Gangster> gangsters = this.entityManager.currentEntities.stream()
 																	 .filter(p -> p instanceof Gangster)
 																	 .map(Gangster.class::cast)
-																	 .collect(Collectors.toList());
+																	 .toList();
 		for(Gangster g: gangsters) {
 			if(this.player.getHitBox().intersects(g.getBullet().getHitBox())) {
 				this.isDead = true;
