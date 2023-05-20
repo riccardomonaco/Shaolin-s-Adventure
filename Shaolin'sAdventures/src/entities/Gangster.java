@@ -15,7 +15,6 @@ import static utils.Constants.ObjectsConstants.*;
  * This represents an extension of {@link entities.Entity}
  * 
  * This is a type of entity, specifically a Gangster, an enemy
- * 
  */
 public class Gangster extends Entity{
 	
